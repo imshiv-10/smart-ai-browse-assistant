@@ -14,7 +14,7 @@ class Settings(BaseSettings):
 
     # LLM settings
     llm_provider: str = "ollama"  # Options: ollama, vllm, openai
-    llm_model: str = "qwen2.5:72b"
+    llm_model: str = "qwen2.5:7b"
     llm_base_url: str = "http://localhost:11434"
     llm_api_key: str = ""  # For OpenAI/Anthropic
     llm_temperature: float = 0.7

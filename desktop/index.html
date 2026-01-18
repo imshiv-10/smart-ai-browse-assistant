@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Browse Assistant</title>
+    <style>
+      /* Prevent text selection and context menu for native feel */
+      body {
+        -webkit-user-select: none;
+        user-select: none;
+        overflow: hidden;
+      }
+      /* Allow selection in input areas */
+      input, textarea, [contenteditable="true"], .selectable {
+        -webkit-user-select: text;
+        user-select: text;
+      }
+      /* Smooth drag region for title bar */
+      .titlebar-drag-region {
+        -webkit-app-region: drag;
+      }
+      .titlebar-drag-region button, .titlebar-drag-region input {
+        -webkit-app-region: no-drag;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
