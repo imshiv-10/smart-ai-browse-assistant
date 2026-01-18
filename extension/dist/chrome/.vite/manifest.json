@@ -1,0 +1,79 @@
+{
+  "../../../../../../../@crx/manifest": {
+    "file": "assets/crx-manifest.js-DWtaPsgx.js",
+    "name": "crx-manifest.js",
+    "src": "../../../../../../../@crx/manifest",
+    "isEntry": true
+  },
+  "_browser-polyfill-DY9jeWLg.js": {
+    "file": "assets/browser-polyfill-DY9jeWLg.js",
+    "name": "browser-polyfill"
+  },
+  "_globals-!~{004}~.js": {
+    "file": "assets/globals-0KCkG7sn.css",
+    "src": "_globals-!~{004}~.js"
+  },
+  "_globals-DKzHCZUm.js": {
+    "file": "assets/globals-DKzHCZUm.js",
+    "name": "globals",
+    "imports": [
+      "_browser-polyfill-DY9jeWLg.js",
+      "_storage-CReADF-2.js"
+    ],
+    "css": [
+      "assets/globals-0KCkG7sn.css"
+    ]
+  },
+  "_storage-CReADF-2.js": {
+    "file": "assets/storage-CReADF-2.js",
+    "name": "storage",
+    "imports": [
+      "_browser-polyfill-DY9jeWLg.js"
+    ]
+  },
+  "extractor.ts-loader.js": {
+    "file": "assets/extractor.ts-loader-CtWSCW1f.js",
+    "src": "extractor.ts-loader.js"
+  },
+  "src/background/index.ts": {
+    "file": "assets/index.ts-B76PrxvJ.js",
+    "name": "index.ts",
+    "src": "src/background/index.ts",
+    "isEntry": true,
+    "imports": [
+      "_browser-polyfill-DY9jeWLg.js",
+      "_storage-CReADF-2.js"
+    ]
+  },
+  "src/content/extractor.ts": {
+    "file": "assets/extractor.ts-DOw3NIv9.js",
+    "name": "extractor.ts",
+    "src": "src/content/extractor.ts",
+    "isEntry": true,
+    "imports": [
+      "_browser-polyfill-DY9jeWLg.js"
+    ]
+  },
+  "src/popup/index.html": {
+    "file": "assets/popup-CH31ZUPR.js",
+    "name": "popup",
+    "src": "src/popup/index.html",
+    "isEntry": true,
+    "imports": [
+      "_globals-DKzHCZUm.js",
+      "_browser-polyfill-DY9jeWLg.js",
+      "_storage-CReADF-2.js"
+    ]
+  },
+  "src/sidepanel/index.html": {
+    "file": "assets/sidepanel-CH31ZUPR.js",
+    "name": "sidepanel",
+    "src": "src/sidepanel/index.html",
+    "isEntry": true,
+    "imports": [
+      "_globals-DKzHCZUm.js",
+      "_browser-polyfill-DY9jeWLg.js",
+      "_storage-CReADF-2.js"
+    ]
+  }
+}

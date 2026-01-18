@@ -1,0 +1,80 @@
+version: '3.8'
+
+services:
+  # Smart Browse Assistant Backend
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: smart-browse-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=false
+      - LLM_PROVIDER=ollama
+      - LLM_MODEL=qwen2.5:7b
+      - LLM_BASE_URL=http://ollama:11434
+      - SCRAPER_HEADLESS=true
+      - SCRAPER_TIMEOUT=30000
+      - CORS_ORIGINS=["*"]
+    depends_on:
+      - ollama
+    networks:
+      - smart-browse-network
+    restart: unless-stopped
+    volumes:
+      - ./app:/app/app:ro  # Mount for development
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Ollama LLM Server
+  ollama:
+    image: ollama/ollama:latest
+    container_name: smart-browse-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    networks:
+      - smart-browse-network
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    # Pull the model on startup (run separately if GPU not available)
+    # entrypoint: ["/bin/sh", "-c", "ollama serve & sleep 5 && ollama pull qwen2.5:7b && wait"]
+
+  # Redis cache (optional)
+  redis:
+    image: redis:7-alpine
+    container_name: smart-browse-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - smart-browse-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  smart-browse-network:
+    driver: bridge
+
+volumes:
+  ollama-data:
+    driver: local
+  redis-data:
+    driver: local

@@ -1,0 +1,446 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --popup-width: 420px;
+  --popup-height: 640px;
+
+  /* Apple-inspired colors */
+  --apple-blue: #007AFF;
+  --apple-blue-dark: #0A84FF;
+  --apple-gray-1: #8E8E93;
+  --apple-gray-2: #AEAEB2;
+  --apple-gray-3: #C7C7CC;
+  --apple-gray-4: #D1D1D6;
+  --apple-gray-5: #E5E5EA;
+  --apple-gray-6: #F2F2F7;
+  --apple-green: #34C759;
+  --apple-red: #FF3B30;
+  --apple-orange: #FF9500;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  width: var(--popup-width);
+  height: var(--popup-height);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: linear-gradient(180deg, #F5F5F7 0%, #FFFFFF 100%);
+  color: #1D1D1F;
+}
+
+body.dark {
+  background: linear-gradient(180deg, #1C1C1E 0%, #000000 100%);
+  color: #F5F5F7;
+}
+
+/* Apple-style scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Glassmorphism effects */
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+.dark .glass {
+  background: rgba(28, 28, 30, 0.72);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+.dark .glass-card {
+  background: rgba(44, 44, 46, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Message bubble animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.dark .skeleton {
+  background: linear-gradient(90deg, #2c2c2e 25%, #3a3a3c 50%, #2c2c2e 75%);
+  background-size: 200% 100%;
+}
+
+/* Loading dots animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.loading-dot {
+  animation: pulse 1.2s infinite ease-in-out;
+}
+
+.loading-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Apple-style buttons */
+.btn {
+  @apply px-5 py-2.5 rounded-full font-medium transition-all duration-200;
+  @apply focus:outline-none active:scale-95;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.btn-primary {
+  background: var(--apple-blue);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+}
+
+.btn-primary:hover {
+  background: #0066CC;
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.4);
+}
+
+.btn-secondary {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--apple-blue);
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.dark .btn-primary {
+  background: var(--apple-blue-dark);
+  box-shadow: 0 2px 8px rgba(10, 132, 255, 0.3);
+}
+
+.dark .btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--apple-blue-dark);
+}
+
+/* Message bubbles - iMessage style */
+.message-user {
+  background: linear-gradient(135deg, #007AFF 0%, #0056CC 100%);
+  color: white;
+  border-radius: 20px 20px 4px 20px;
+  box-shadow: 0 2px 12px rgba(0, 122, 255, 0.25);
+}
+
+.message-assistant {
+  background: rgba(0, 0, 0, 0.05);
+  color: #1D1D1F;
+  border-radius: 20px 20px 20px 4px;
+}
+
+.dark .message-assistant {
+  background: rgba(255, 255, 255, 0.1);
+  color: #F5F5F7;
+}
+
+/* Apple-style card */
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.dark .card {
+  background: #2C2C2E;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Apple-style input */
+.input {
+  @apply w-full px-4 py-3 rounded-xl border-0;
+  background: rgba(0, 0, 0, 0.04);
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.input:focus {
+  @apply outline-none ring-2;
+  ring-color: var(--apple-blue);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
+}
+
+.input::placeholder {
+  color: var(--apple-gray-1);
+}
+
+.dark .input {
+  background: rgba(255, 255, 255, 0.08);
+  color: #F5F5F7;
+}
+
+.dark .input:focus {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.dark .input::placeholder {
+  color: var(--apple-gray-2);
+}
+
+/* Tab navigation - Apple segment control style */
+.segment-control {
+  display: flex;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  padding: 2px;
+}
+
+.segment-item {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--apple-gray-1);
+  transition: all 0.2s ease;
+  text-align: center;
+  cursor: pointer;
+}
+
+.segment-item.active {
+  background: white;
+  color: #1D1D1F;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.dark .segment-control {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dark .segment-item.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: #F5F5F7;
+}
+
+/* Badges */
+.badge {
+  @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium;
+}
+
+.badge-success {
+  background: rgba(52, 199, 89, 0.12);
+  color: var(--apple-green);
+}
+
+.badge-warning {
+  background: rgba(255, 149, 0, 0.12);
+  color: var(--apple-orange);
+}
+
+.badge-error {
+  background: rgba(255, 59, 48, 0.12);
+  color: var(--apple-red);
+}
+
+.badge-info {
+  background: rgba(0, 122, 255, 0.12);
+  color: var(--apple-blue);
+}
+
+.dark .badge-success {
+  background: rgba(52, 199, 89, 0.2);
+}
+
+.dark .badge-warning {
+  background: rgba(255, 149, 0, 0.2);
+}
+
+.dark .badge-error {
+  background: rgba(255, 59, 48, 0.2);
+}
+
+.dark .badge-info {
+  background: rgba(10, 132, 255, 0.2);
+  color: var(--apple-blue-dark);
+}
+
+/* Summary section styling */
+.summary-header {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #1D1D1F;
+}
+
+.dark .summary-header {
+  color: #F5F5F7;
+}
+
+.key-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.key-point:last-child {
+  border-bottom: none;
+}
+
+.key-point-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--apple-blue) 0%, #0056CC 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dark .key-point {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Typing indicator */
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  padding: 16px 20px;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--apple-gray-2);
+  border-radius: 50%;
+}
+
+/* Topic pills */
+.topic-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1D1D1F;
+  transition: all 0.2s ease;
+}
+
+.topic-pill:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.dark .topic-pill {
+  background: rgba(255, 255, 255, 0.08);
+  color: #F5F5F7;
+}
+
+.dark .topic-pill:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.06);
+  margin: 16px 0;
+}
+
+.dark .divider {
+  background: rgba(255, 255, 255, 0.08);
+}
