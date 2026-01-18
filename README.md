@@ -159,4 +159,3 @@ ruff check .             # Lint code
 ## License
 
 MIT
-# smart-ai-browse-assistant
